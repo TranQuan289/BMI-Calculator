@@ -6,32 +6,56 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
+const hightCalculator = 80.0;
+const colorCard = Color(0xFF1D1F33);
+const colorBottom = Color(0xFFEA1556);
+
 class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            title: Text(
-          "BMI Caculator",
-        )),
+          centerTitle: true,
+          title: Text(
+            "BMI Calculator",
+            style: letterStyle(20.0, 'Tiro'),
+          ),
+        ),
         body: Column(
           children: [
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(Color(0xFF1D1F33))),
-                  Expanded(child: ReusableCard(Color(0xFF1D1F33)))
+                  Expanded(child: ReusableCard(colorCard)),
+                  Expanded(child: ReusableCard(colorCard))
                 ],
               ),
             ),
-            Expanded(child: ReusableCard(Color(0xFF1D1F33))),
+            Expanded(child: ReusableCard(colorCard)),
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(Color(0xFF1D1F33))),
-                  Expanded(child: ReusableCard(Color(0xFF1D1F33)))
+                  Expanded(child: ReusableCard(colorCard)),
+                  Expanded(child: ReusableCard(colorCard))
                 ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: hightCalculator,
+              decoration: BoxDecoration(
+                color: colorBottom,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  'Calculate Your BMI',
+                  style: letterStyle(20.0, 'Tiro'),
+                ),
               ),
             )
           ],
@@ -39,6 +63,9 @@ class _InputPageState extends State<InputPage> {
       ),
     );
   }
+
+  TextStyle letterStyle(double size, String font) =>
+      TextStyle(fontSize: size, fontFamily: font);
 }
 
 class ReusableCard extends StatelessWidget {
