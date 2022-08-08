@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -27,17 +28,24 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(colorCard)),
-                  Expanded(child: ReusableCard(colorCard))
+                  Expanded(
+                    child: ReusableCard(
+                      colorCard,
+                      cardColumn(FontAwesomeIcons.mars, "MALE"),
+                    ),
+                  ),
+                  Expanded(
+                      child: ReusableCard(colorCard,
+                          cardColumn(FontAwesomeIcons.venus, "FEMALE")))
                 ],
               ),
             ),
-            Expanded(child: ReusableCard(colorCard)),
+            Expanded(child: ReusableCard(colorCard, SizedBox.shrink())),
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(colorCard)),
-                  Expanded(child: ReusableCard(colorCard))
+                  Expanded(child: ReusableCard(colorCard, SizedBox.shrink())),
+                  Expanded(child: ReusableCard(colorCard, SizedBox.shrink()))
                 ],
               ),
             ),
@@ -68,12 +76,42 @@ class _InputPageState extends State<InputPage> {
       TextStyle(fontSize: size, fontFamily: font);
 }
 
+class cardColumn extends StatelessWidget {
+  cardColumn(this.icon, this.text);
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 80.0,
+        ),
+        SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+              fontSize: 13.0, color: Color(0xFF8D8E98), fontFamily: 'Tiro'),
+        )
+      ],
+    );
+  }
+}
+
 class ReusableCard extends StatelessWidget {
-  ReusableCard(this.color);
+  ReusableCard(this.color, this.cardChild);
   final Color color;
+  final Widget cardChild;
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: cardChild,
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(5.0)),
       margin: EdgeInsets.all(15.0),
