@@ -1,5 +1,8 @@
+import 'package:bmi/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'card_column.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -9,9 +12,14 @@ class InputPage extends StatefulWidget {
 
 const hightCalculator = 80.0;
 const colorCard = Color(0xFF1D1F33);
+const incolorCard = Color(0xFF111328);
 const colorBottom = Color(0xFFEA1556);
 
+enum Gender { male, female }
+
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,22 +38,33 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      colorCard,
+                      () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      },
+                      selectedGender == Gender.male ? colorCard : incolorCard,
                       cardColumn(FontAwesomeIcons.mars, "MALE"),
                     ),
                   ),
                   Expanded(
-                      child: ReusableCard(colorCard,
+                      child: ReusableCard(() {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  }, selectedGender == Gender.female ? colorCard : incolorCard,
                           cardColumn(FontAwesomeIcons.venus, "FEMALE")))
                 ],
               ),
             ),
-            Expanded(child: ReusableCard(colorCard, SizedBox.shrink())),
+            Expanded(child: ReusableCard(() {}, colorCard, SizedBox.shrink())),
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(colorCard, SizedBox.shrink())),
-                  Expanded(child: ReusableCard(colorCard, SizedBox.shrink()))
+                  Expanded(
+                      child: ReusableCard(() {}, colorCard, SizedBox.shrink())),
+                  Expanded(
+                      child: ReusableCard(() {}, colorCard, SizedBox.shrink()))
                 ],
               ),
             ),
@@ -74,47 +93,4 @@ class _InputPageState extends State<InputPage> {
 
   TextStyle letterStyle(double size, String font) =>
       TextStyle(fontSize: size, fontFamily: font);
-}
-
-class cardColumn extends StatelessWidget {
-  cardColumn(this.icon, this.text);
-
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 80.0,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-              fontSize: 13.0, color: Color(0xFF8D8E98), fontFamily: 'Tiro'),
-        )
-      ],
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  ReusableCard(this.color, this.cardChild);
-  final Color color;
-  final Widget cardChild;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      decoration:
-          BoxDecoration(color: color, borderRadius: BorderRadius.circular(5.0)),
-      margin: EdgeInsets.all(15.0),
-    );
-  }
 }
