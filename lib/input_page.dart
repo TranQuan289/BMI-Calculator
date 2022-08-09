@@ -12,9 +12,13 @@ class InputPage extends StatefulWidget {
 
 enum Gender { male, female }
 
+enum Calculaton { minus, add }
+
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
+  int weight = 50;
+  int age = 20;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -110,10 +114,90 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(
-                      child:
-                          ReusableCard(() {}, kColorCard, SizedBox.shrink())),
+                    child: ReusableCard(
+                      () {},
+                      kColorCard,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                FontAwesomeIcons.minus,
+                                (() {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                }),
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                FontAwesomeIcons.plus,
+                                (() {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                }),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   Expanded(
-                      child: ReusableCard(() {}, kColorCard, SizedBox.shrink()))
+                      child: ReusableCard(
+                    () {},
+                    kColorCard,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              FontAwesomeIcons.minus,
+                              (() {
+                                setState(() {
+                                  age--;
+                                });
+                              }),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              FontAwesomeIcons.plus,
+                              (() {
+                                setState(() {
+                                  age++;
+                                });
+                              }),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ))
                 ],
               ),
             ),
@@ -137,6 +221,22 @@ class _InputPageState extends State<InputPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton(this.icon, this.onPress);
+  final IconData icon;
+  final VoidCallback onPress;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: onPress,
+      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
     );
   }
 }
