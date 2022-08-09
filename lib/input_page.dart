@@ -1,7 +1,7 @@
 import 'package:bmi/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'constains.dart';
 import 'card_column.dart';
 
 class InputPage extends StatefulWidget {
@@ -10,16 +10,11 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
-const hightCalculator = 80.0;
-const colorCard = Color(0xFF1D1F33);
-const incolorCard = Color(0xFF111328);
-const colorBottom = Color(0xFFEA1556);
-
 enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
-
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,36 +38,81 @@ class _InputPageState extends State<InputPage> {
                           selectedGender = Gender.male;
                         });
                       },
-                      selectedGender == Gender.male ? colorCard : incolorCard,
+                      selectedGender == Gender.male ? kColorCard : kIncolorCard,
                       cardColumn(FontAwesomeIcons.mars, "MALE"),
                     ),
                   ),
                   Expanded(
-                      child: ReusableCard(() {
-                    setState(() {
-                      selectedGender = Gender.female;
-                    });
-                  }, selectedGender == Gender.female ? colorCard : incolorCard,
-                          cardColumn(FontAwesomeIcons.venus, "FEMALE")))
+                    child: ReusableCard(() {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                        selectedGender == Gender.female
+                            ? kColorCard
+                            : kIncolorCard,
+                        cardColumn(FontAwesomeIcons.venus, "FEMALE")),
+                  )
                 ],
               ),
             ),
-            Expanded(child: ReusableCard(() {}, colorCard, SizedBox.shrink())),
+            Expanded(
+              child: ReusableCard(
+                () {},
+                kColorCard,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'HEIGHT',
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          "cm",
+                          style: kLabelTextStyle,
+                        )
+                      ],
+                    ),
+                    Slider(
+                        value: height.toDouble(),
+                        min: 100.0,
+                        max: 220.0,
+                        activeColor: kColorBottomAndSlider,
+                        inactiveColor: kColorInSlider,
+                        onChanged: (double valueSlider) {
+                          setState(() {
+                            height = valueSlider.toInt();
+                          });
+                        })
+                  ],
+                ),
+              ),
+            ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                      child: ReusableCard(() {}, colorCard, SizedBox.shrink())),
+                      child:
+                          ReusableCard(() {}, kColorCard, SizedBox.shrink())),
                   Expanded(
-                      child: ReusableCard(() {}, colorCard, SizedBox.shrink()))
+                      child: ReusableCard(() {}, kColorCard, SizedBox.shrink()))
                 ],
               ),
             ),
             Container(
               width: double.infinity,
-              height: hightCalculator,
+              height: kHightCalculator,
               decoration: BoxDecoration(
-                color: colorBottom,
+                color: kColorBottomAndSlider,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
@@ -90,7 +130,4 @@ class _InputPageState extends State<InputPage> {
       ),
     );
   }
-
-  TextStyle letterStyle(double size, String font) =>
-      TextStyle(fontSize: size, fontFamily: font);
 }

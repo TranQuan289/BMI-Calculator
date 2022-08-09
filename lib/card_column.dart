@@ -1,3 +1,4 @@
+import 'package:bmi/constains.dart';
 import 'package:flutter/material.dart';
 
 class cardColumn extends StatelessWidget {
@@ -20,14 +21,9 @@ class cardColumn extends StatelessWidget {
         ),
         Text(
           text,
-          style: cardStyle(),
+          style: kLabelTextStyle,
         )
       ],
     );
-  }
-
-  TextStyle cardStyle() {
-    return TextStyle(
-        fontSize: 13.0, color: Color(0xFF8D8E98), fontFamily: 'Tiro');
   }
 }
