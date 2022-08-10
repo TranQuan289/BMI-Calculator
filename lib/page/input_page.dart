@@ -1,8 +1,11 @@
-import 'package:bmi/reusable_card.dart';
+import 'package:bmi/components/bottom_button.dart';
+import 'package:bmi/components/reusable_card.dart';
+import 'package:bmi/result_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constains.dart';
-import 'card_column.dart';
+import '../constains.dart';
+import '../components/card_column.dart';
+import 'result_page.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -26,7 +29,7 @@ class _InputPageState extends State<InputPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "BMI Calculator",
+            "Máy Tính BMI",
             style: letterStyle(20.0, 'Tiro'),
           ),
         ),
@@ -43,7 +46,7 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       selectedGender == Gender.male ? kColorCard : kIncolorCard,
-                      cardColumn(FontAwesomeIcons.mars, "MALE"),
+                      cardColumn(FontAwesomeIcons.mars, "NAM"),
                     ),
                   ),
                   Expanded(
@@ -55,7 +58,7 @@ class _InputPageState extends State<InputPage> {
                         selectedGender == Gender.female
                             ? kColorCard
                             : kIncolorCard,
-                        cardColumn(FontAwesomeIcons.venus, "FEMALE")),
+                        cardColumn(FontAwesomeIcons.venus, "NỮ")),
                   )
                 ],
               ),
@@ -68,7 +71,7 @@ class _InputPageState extends State<InputPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'HEIGHT',
+                      'CHIỀU CAO',
                       style: kLabelTextStyle,
                     ),
                     Row(
@@ -121,7 +124,7 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'WEIGHT',
+                            'CÂN NẶNG',
                             style: kLabelTextStyle,
                           ),
                           Text(
@@ -164,7 +167,7 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'AGE',
+                          'TUỔI',
                           style: kLabelTextStyle,
                         ),
                         Text(
@@ -201,23 +204,17 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: kHightCalculator,
-              decoration: BoxDecoration(
-                color: kColorBottomAndSlider,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  'Calculate Your BMI',
-                  style: letterStyle(20.0, 'Tiro'),
-                ),
-              ),
-            )
+            bottomButton(() {
+              ResultBrain resultBrain = ResultBrain(height, weight);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                          resultBrain.BMI_Calculator(),
+                          resultBrain.getResult(),
+                          resultBrain.getInterpretation())));
+            }, 'Xem kết quả nào')
           ],
         ),
       ),

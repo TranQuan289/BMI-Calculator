@@ -77,8 +77,7 @@ flutter:
   fonts:
     - family: Tiro
       fonts:
-        - asset: fonts/TiroGurmukhi-Regular.ttf
-        - asset: fonts/TiroGurmukhi-Italic.ttf
+        - asset: fonts/RobotoSlab-Bold.ttf
           weight: 400
   #         style: italic
   #   - family: Trajan Pro

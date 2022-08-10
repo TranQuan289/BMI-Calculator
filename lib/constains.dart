@@ -13,3 +13,25 @@ const kLabelTextStyle =
     TextStyle(fontSize: 18.0, fontFamily: 'Tiro', color: Color(0xFF8D8E98));
 
 const kNumberTextStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.w900);
+
+const kResultTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Tiro',
+);
+
+const kBMITextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Tiro',
+);
+
+const kBodyTextStyle = TextStyle(
+  fontSize: 22.0,
+  fontFamily: 'Tiro',
+);
+const kLabelResult = TextStyle(
+  fontSize: 30,
+  fontFamily: 'Tiro',
+);
