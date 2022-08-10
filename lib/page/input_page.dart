@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constains.dart';
 import '../components/card_column.dart';
 import 'result_page.dart';
+import 'package:holding_gesture/holding_gesture.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -223,17 +224,26 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundIconButton extends StatelessWidget {
-  RoundIconButton(this.icon, this.onPress);
+  RoundIconButton(
+    this.icon,
+    this.onPress,
+  );
   final IconData icon;
   final VoidCallback onPress;
+
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      onPressed: onPress,
-      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
+    return HoldDetector(
+      onHold: onPress,
+      holdTimeout: Duration(milliseconds: 200),
+      enableHapticFeedback: true,
+      child: RawMaterialButton(
+        child: Icon(icon),
+        onPressed: onPress,
+        constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
+        shape: CircleBorder(),
+        fillColor: Color(0xFF4C4F5E),
+      ),
     );
   }
 }
