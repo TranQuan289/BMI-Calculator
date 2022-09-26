@@ -1,8 +1,10 @@
 import 'package:bmi/constains.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class bottomButton extends StatelessWidget {
-  bottomButton(this.onTap, this.text);
+  // ignore: use_key_in_widget_constructors
+  const bottomButton(this.onTap, this.text);
   final VoidCallback onTap;
   final String text;
 
@@ -13,7 +15,7 @@ class bottomButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: kHightCalculator,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: kColorBottomAndSlider,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),

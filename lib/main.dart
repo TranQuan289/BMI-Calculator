@@ -1,10 +1,14 @@
-import 'package:bmi/page/result_page.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'page/input_page.dart';
 
-void main() {
-  runApp(BMI());
-}
+void main() => runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const BMI(), // Wrap your app
+      ),
+    );
 
 class BMI extends StatelessWidget {
   const BMI({Key? key}) : super(key: key);
@@ -12,11 +16,14 @@ class BMI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: ThemeData.dark().copyWith(
-        colorScheme: ColorScheme.light(primary: Color(0xFF090C22)),
-        scaffoldBackgroundColor: Color(0xFF090C22),
+        colorScheme: const ColorScheme.light(primary: Color(0xFF090C22)),
+        scaffoldBackgroundColor: const Color(0xFF090C22),
       ),
-      home: InputPage(),
+      home: const InputPage(),
     );
   }
 }
