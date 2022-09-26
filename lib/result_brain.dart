@@ -12,21 +12,21 @@ class ResultBrain {
 
   String getResult() {
     if (_bmi >= 25) {
-      return 'Hơi Mũm Mĩm :>';
+      return 'Thừa Cân';
     } else if (_bmi > 18.5) {
-      return 'Bình Thường :)';
+      return 'Bình Thường';
     } else {
-      return 'Hơi Ốm :(';
+      return 'Thiếu Cân';
     }
   }
 
   String getInterpretation() {
     if (_bmi >= 25) {
-      return 'Thừa cân';
+      return 'Bạn nên ăn ít hơn';
     } else if (_bmi >= 18.5) {
-      return 'Trung bình';
+      return 'Bạn nên giữ chế độ ăn uống hiện tại nhé';
     } else {
-      return 'Gầy';
+      return 'Bạn nên ăn nhiều hơn nhé  ';
     }
   }
 }
