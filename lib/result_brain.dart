@@ -22,11 +22,11 @@ class ResultBrain {
 
   String getInterpretation() {
     if (_bmi >= 25) {
-      return 'Mũm mĩm tí cũng không sao nhưng mà ốm tí chắc sẽ đẹp hơn á :3';
+      return 'Thừa cân';
     } else if (_bmi >= 18.5) {
-      return 'Đẹp rồi đó, out ra được rồi ';
+      return 'Trung bình';
     } else {
-      return 'Ốm tí cũng xinh mà, xu thế đó';
+      return 'Gầy';
     }
   }
 }
